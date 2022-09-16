@@ -8,28 +8,36 @@
   
   tasks:
   
-  - name: get cert info
+  - name: get current cert info
     community.crypto.x509_certificate_info:
       path: "{{cert_path}}"
       valid_at:
-        point_1: "+1d"
-        point_2: "+91d"
+        point_1: "-1m" #true if valid 1 minute ago
+        point_2: "+7d" #true if valid in 7 days        
     register: cert_info
-  
+
   - name: test cert validity
     assert:
       that:
-        - cert_info.valid_at.point_1
-        - not cert_info.valid_at.point_2
+        - '(not cert_info.valid_at.point_1) or (not cert_info.valid_at.point_2)'
       quiet: true
-      success_msg: "cert requires renewal within 7 days"
-      fail_msg: "cert does not require renewal yet"
-  
-  - debug:
-      msg: "end_play"
-  #- name: end playbook
-  #  meta: end_play
+      success_msg: "cert expired or will expire in next 7 days"
+      fail_msg: "cert is valid for longer than 7 days"
 
-  #- name: renew cert
-  #  include_role:
-  #    name: renew_cert
+  # playbook will fail at this point if the certificate is valid for longer than 7 days
+
+  - name: renew cert
+    include_role:
+      name: renew_cert
+
+  - name: get new cert info
+    community.crypto.x509_certificate_info:
+      path: "{{cert_path}}"
+    register: new_cert_info
+  
+  - name: dump cert info
+    debug:
+      msg:
+        - "CERTIFICATE RENEWAL SUCCESS"
+        - "Old cert expiry: {{cert_info.not_after}}"
+        - "New cert expiry: {{new_cert_info.not_after}}"
