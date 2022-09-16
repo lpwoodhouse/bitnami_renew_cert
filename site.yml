@@ -22,7 +22,7 @@
         - cert_info.valid_at.point_1
         - not cert_info.valid_at.point_2
       quite: true
-      success_msg: "cert requires renewal"
+      success_msg: "cert requires renewal within 7 days"
       fail_msg: "cert does not require renewal yet"
   
   - debug:
