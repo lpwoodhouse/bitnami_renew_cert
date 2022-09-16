@@ -11,3 +11,7 @@
 # run installed script to start bitnami service
 - name: start service
   command: 'sudo /opt/bitnami/ctlscript.sh start'
+
+# dump renewal info
+- debug:
+    var: renew_result
