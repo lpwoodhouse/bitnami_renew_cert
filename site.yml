@@ -13,7 +13,7 @@
       path: "{{cert_path}}"
       valid_at:
         point_1: "-1m" #true if valid 1 minute ago
-        point_2: "+91d" #true if valid in 7 days        
+        point_2: "+7d" #true if valid in 7 days        
     register: cert_info
 
   - name: test cert validity
