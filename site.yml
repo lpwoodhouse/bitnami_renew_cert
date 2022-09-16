@@ -11,15 +11,25 @@
   - name: get cert info
     community.crypto.x509_certificate_info:
       path: "{{cert_path}}"
+      valid_at:
+        point_1: "+1d"
+        point_2: "+7d"
     register: cert_info
   
-  - name: cert info dump
-    debug:
-      var: cert_info.not_after
+  - name: test cert validity
+    assert:
+      that:
+        - cert_info.valid_at.point_1
+        - not cert_info.valid_at.point_2
+    quite: yes
+    success_msg: cert requires renewal
+    fail_msg: cert does not require renewal yet
   
-  - name: end playbook
-    meta: end_play
+  - debug:
+      msg: "end_play"
+  #- name: end playbook
+  #  meta: end_play
 
-  - name: renew cert
-    include_role:
-      name: renew_cert
+  #- name: renew cert
+  #  include_role:
+  #    name: renew_cert
