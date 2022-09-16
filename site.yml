@@ -1,0 +1,31 @@
+---
+# main task for role execution
+- name: configure inventory hosts
+  hosts: localhost
+  gather_facts: no
+  
+  vars:
+    linux_hosts: "{{ survey_hosts.split('\n') }}"  
+  
+  tasks:
+    
+  - name: make host group from survey hosts list
+    add_host:
+      hostname: "{{ item }}"
+      groupname: new_group      
+    loop: "{{ linux_hosts }}"
+
+- name: configure domain on hosts
+  hosts: new_group,!localhost
+  gather_facts: true
+  become: true
+  
+  tasks:
+  
+  - name: config packages
+    include_role:
+      name: config_packages
+
+  - name: join domain
+    include_role:
+      name: join_domain

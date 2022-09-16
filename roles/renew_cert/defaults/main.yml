@@ -1,0 +1,7 @@
+---
+lab_hostname: <hostname>
+domain: <domain>
+wkgrp: <workgroup>
+dc_addr: <address>
+bind_user: <domain_admin_user>
+bind_password: <password>
