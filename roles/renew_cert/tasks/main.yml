@@ -1,1 +1,11 @@
 ---
+# run installed script to stop bitnami service
+- name: stop service
+  command: 'sudo /opt/bitnami/ctlscript.sh stop'
+
+- name: renew certificate
+  command: 'sudo /opt/bitnami/letsencrypt/lego --tls --email="{{cert_email}}" --domains="{{cert_domain}}" --path="/opt/bitnami/letsencrypt" renew --days 90'
+  register: renew_result
+
+- name: start service
+  command: 'sudo /opt/bitnami/ctlscript.sh start'

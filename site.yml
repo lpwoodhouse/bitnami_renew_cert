@@ -1,31 +1,25 @@
 ---
 # main task for role execution
-- name: configure inventory hosts
-  hosts: localhost
+# inventory host and credentials must be created and specified in AWX template
+- name: renew the LetsEncrypt cert on a AWS Lightsail Bitnami instance
+  hosts: all
   gather_facts: no
-  
-  vars:
-    linux_hosts: "{{ survey_hosts.split('\n') }}"  
-  
-  tasks:
-    
-  - name: make host group from survey hosts list
-    add_host:
-      hostname: "{{ item }}"
-      groupname: new_group      
-    loop: "{{ linux_hosts }}"
-
-- name: configure domain on hosts
-  hosts: new_group,!localhost
-  gather_facts: true
   become: true
   
   tasks:
   
-  - name: config packages
-    include_role:
-      name: config_packages
+  - name: get cert info
+    x509_certificate_info:
+      path: "{{cert_path}}"
+    register: cert_info
+  
+  - name: cert info dump
+    debug:
+      var: cert_info
+  
+  - name: end playbook
+    meta: end_play
 
-  - name: join domain
+  - name: renew cert
     include_role:
-      name: join_domain
+      name: renew_cert

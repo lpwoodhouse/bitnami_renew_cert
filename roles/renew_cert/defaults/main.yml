@@ -1,7 +1,4 @@
 ---
-lab_hostname: <hostname>
-domain: <domain>
-wkgrp: <workgroup>
-dc_addr: <address>
-bind_user: <domain_admin_user>
-bind_password: <password>
+cert_email: lpwoodhouse@gmail.com
+cert_domain: leewoodhouse.com
+cert_path: /opt/bitnami/letsencrypt/certificates/leewoodhouse.com.crt
