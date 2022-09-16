@@ -9,7 +9,7 @@
   tasks:
   
   - name: get cert info
-    x509_certificate_info:
+    community.crypto.x509_certificate_info:
       path: "{{cert_path}}"
     register: cert_info
   
