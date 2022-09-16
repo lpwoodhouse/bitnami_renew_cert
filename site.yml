@@ -13,7 +13,7 @@
       path: "{{cert_path}}"
       valid_at:
         point_1: "+1d"
-        point_2: "+7d"
+        point_2: "+91d"
     register: cert_info
   
   - name: test cert validity
