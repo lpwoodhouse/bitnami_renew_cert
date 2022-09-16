@@ -21,9 +21,9 @@
       that:
         - cert_info.valid_at.point_1
         - not cert_info.valid_at.point_2
-      quite: yes
-      success_msg: cert requires renewal
-      fail_msg: cert does not require renewal yet
+      quite: true
+      success_msg: "cert requires renewal"
+      fail_msg: "cert does not require renewal yet"
   
   - debug:
       msg: "end_play"
