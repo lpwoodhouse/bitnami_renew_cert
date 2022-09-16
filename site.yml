@@ -15,7 +15,7 @@
   
   - name: cert info dump
     debug:
-      var: cert_info
+      var: cert_info.not_after
   
   - name: end playbook
     meta: end_play
