@@ -27,7 +27,7 @@
       quiet: true
       success_msg: "cert is expired or is within the {{ max_validity }} days maximum validity period and will be renewed."
       fail_msg: "certificate validity is longer than {{ max_validity }} days and will not be renewed at this time."
-    when: not skip_check
+    when: not skip_check|bool
 
   # playbook will fail at this point if the certificate is valid for longer than maximum validity
 
