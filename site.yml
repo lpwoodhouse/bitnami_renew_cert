@@ -8,7 +8,7 @@
   
   vars:
     max_validity: 7 # maximum number of days the certificate can still be valid for it to be renewed
-    skip_check: false # validity check will be skipped if true and the certificate will always be renewed
+    skip_check: no # validity check can be skipped and the certificate will always be renewed
 
   tasks:
   
