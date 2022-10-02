@@ -15,9 +15,8 @@
   - name: renew cert
     include_role:
       name: renew_cert
-
     
-  - name: dump cert info
+  - name: results
     debug:
       msg:
         - "CERTIFICATE RENEWAL SUCCESS"
