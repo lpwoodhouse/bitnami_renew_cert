@@ -1,7 +1,4 @@
 ---
-
-
-
 # run installed script to stop bitnami service
 - name: stop service
   command: 'sudo /opt/bitnami/ctlscript.sh stop'
@@ -9,25 +6,12 @@
 # renew the certificate using lego
 - name: renew certificate
   command: 'sudo /opt/bitnami/letsencrypt/lego --tls --email="{{cert_email}}" --domains="{{cert_domain}}" --path="/opt/bitnami/letsencrypt" renew --days 90'
-  register: renew_result
 
 # run installed script to start bitnami service
 - name: start service
   command: 'sudo /opt/bitnami/ctlscript.sh start'
 
-# dump renewal info
-- debug:
-    var: renew_result
-
 - name: get new cert info
-    community.crypto.x509_certificate_info:
-      path: "{{cert_path}}"
-    register: new_cert_info
-  
-  - name: dump cert info
-    debug:
-      msg:
-        - "CERTIFICATE RENEWAL SUCCESS"
-        - "Old cert expiry: {{cert_info.not_after}}"
-        - "New cert expiry: {{new_cert_info.not_after}}"
-
+  community.crypto.x509_certificate_info:
+    path: "{{cert_path}}"
+  register: new_cert_info

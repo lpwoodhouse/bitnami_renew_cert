@@ -16,4 +16,12 @@
     include_role:
       name: renew_cert
 
-  
+    
+  - name: dump cert info
+    debug:
+      msg:
+        - "CERTIFICATE RENEWAL SUCCESS"
+        - "Old cert expiry: {{cert_info.not_after}}"
+        - "New cert expiry: {{new_cert_info.not_after}}"
+
+
