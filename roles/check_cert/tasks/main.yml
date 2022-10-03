@@ -4,18 +4,18 @@
     path: "{{cert_path}}"
     valid_at:
       point_1: "-1m" # true if valid 1 minute ago
-      point_2: "+{{ max_validity }}d" # true if valid in number of days specified by max_validity
+      point_2: "+{{ min_validity }}d" # true if valid in number of days specified by min_validity
   register: cert_info
 
-- name: get timestamp from system
+- name: get datetimestamp
   shell: "date +%Y%m%d%H%M%S%z"
   register: tstamp
 
-- debug:
-    msg:
-      - 'current datetime: {{ tstamp.stdout|to_datetime(format="%Y%m%d%H%M%S%z") }}'
-      - 'cert expires: {{ cert_info.not_after|to_datetime(format="%Y%m%d%H%M%S%z") }}'
-      - 'days remaining: {{ ((cert_info.not_after|to_datetime(format="%Y%m%d%H%M%S%z")) - (tstamp.stdout|to_datetime(format="%Y%m%d%H%M%S%z"))).days }}'
+- name: set datetime vars
+  set_fact:
+    curr_dt: {{ tstamp.stdout|to_datetime(format="%Y%m%d%H%M%S%z") }}'
+    cert_exp_dt: {{ cert_info.not_after|to_datetime(format="%Y%m%d%H%M%S%z") }}'
+    days_rem: {{ ((cert_info.not_after|to_datetime(format="%Y%m%d%H%M%S%z")) - (tstamp.stdout|to_datetime(format="%Y%m%d%H%M%S%z"))).days }}'
 
 - name: test cert validity
   assert:
@@ -24,11 +24,14 @@
     quiet: true    
     
     success_msg:
-      The current certificate is expired or is within the {{ max_validity }} days maximum validity period and will be renewed.  
+      The current certificate expiry was/is {{ cert_exp_dt }}. {{ days_rem }}
+      Shorter than the defined minimum validity of {{ min_validity }} days.
+      Certificate will be renewed. 
     
     fail_msg:
-      The current certificate validity is longer than {{ max_validity }} days and will not be renewed at this time.
-      Certificate will remain valid until {{ cert_info.not_after|to_datetime(format="%Y%m%d%H%M%S%z") }}
+      The current certificate is valid for {{ days_rem }} days.
+      Longer than the defined minimum validity of {{ min_validity }} days.
+      Certificate will not be renewed at this time.
   
   when: not skip_check|bool
 
