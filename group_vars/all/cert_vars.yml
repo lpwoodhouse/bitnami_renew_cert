@@ -1,4 +1,5 @@
 ---
-cert_email: lpwoodhouse@gmail.com
-cert_domain: leewoodhouse.com
-cert_path: /opt/bitnami/letsencrypt/certificates/leewoodhouse.com.crt
+cert_email: <email> # The email used to register the certificate with LetsEncrypt
+cert_domain: <domain> # The certificate domain registered with LetsEncrypt
+cert_path: /opt/bitnami/letsencrypt/certificates/<domain>.crt
+
