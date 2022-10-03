@@ -24,7 +24,7 @@
     quiet: true    
     
     success_msg:
-      The current certificate expiry was/is {{ cert_exp_dt }}. {{ days_rem }}
+      The current certificate expiry was/is {{ cert_exp_dt }}. {{ days_rem }} days remaining.
       Shorter than the defined minimum validity of {{ min_validity }} days.
       Certificate will be renewed. 
     
