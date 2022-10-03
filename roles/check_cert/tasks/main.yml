@@ -4,7 +4,7 @@
     path: "{{cert_path}}"
     valid_at:
       point_1: "-1m" # true if valid 1 minute ago
-      point_2: "+{{ min_validity }}d" # true if valid in number of days specified by min_validity
+      point_2: "+{{ max_validity }}d" # true if certificate is still valid in number of days specified by max_validity
   register: cert_info
 
 - name: get datetimestamp
@@ -25,12 +25,12 @@
     
     success_msg:
       The current certificate expiry was/is {{ cert_exp_dt }}. {{ days_rem }} days remaining.
-      Shorter than the defined minimum validity of {{ min_validity }} days.
+      Shorter than the defined maximum validity of {{ max_validity }} days before renewal will be carried out.
       Certificate will be renewed. 
     
     fail_msg:
       The current certificate is valid for {{ days_rem }} days.
-      Longer than the defined minimum validity of {{ min_validity }} days.
+      Longer than the defined maximum validity of {{ max_validity }} days before renewal will be carried out.
       Certificate will not be renewed at this time.
   
   when: not skip_check|bool
