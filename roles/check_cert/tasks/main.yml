@@ -14,11 +14,11 @@
     quiet: true
     
     success_msg:
-      The current certificate is expired or is within the {{ max_validity }} days maximum validity period and will be renewed.
+      'The current certificate is expired or is within the {{ max_validity }} days maximum validity period and will be renewed.'
     
     fail_msg:
-      The current certificate validity is longer than {{ max_validity }} days and will not be renewed at this time.
-      Certificate will remain valid until {{ cert_info.not_after|to_datetime(format="%Y%m%d%H%M%S%Z") }}
+      'The current certificate validity is longer than {{ max_validity }} days and will not be renewed at this time.
+      Certificate will remain valid until {{ cert_info.not_after|to_datetime(format="%Y%m%d%H%M%S%Z") }}'
   
   when: not skip_check|bool
 
