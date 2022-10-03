@@ -13,7 +13,7 @@
 
 - debug:
     msg:
-      - 'current datetime: {{ tstamp }}'
+      - 'current datetime: {{ tstamp.stdout|to_datetime(format="%Y%m%d%H%M%S%z") }}'
       - 'cert expires: {{ cert_info.not_after|to_datetime(format="%Y%m%d%H%M%S%z") }}'
 
 - name: test cert validity
