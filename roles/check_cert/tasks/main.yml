@@ -18,7 +18,7 @@
     
     fail_msg:
       The current certificate validity is longer than {{ max_validity }} days and will not be renewed at this time.
-      Certificate will remain valid for another {{ cert_info.not_after|to_datetime(format="%Y%m%d%H%M%S") }}
+      Certificate will remain valid until {{ cert_info.not_after|to_datetime(format="%Y%m%d%H%M%S") }}
   
   when: not skip_check|bool
 
