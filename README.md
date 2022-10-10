@@ -1,7 +1,7 @@
 # Renew SSL Cert on AWS Lightsail Bitnami Host
 ![Amazon AWS](https://img.shields.io/badge/Amazon%20AWS-232F3E?style=flat&logo=amazon-aws)
 ![LetsEncrypt](https://img.shields.io/badge/Let's%20Encrypt-122e58?style=flat&logo=letsencrypt&logoColor=orange)
-[![playbook](https://img.shields.io/badge/Ansible-Playbook-blue)](site.yml)
+[![playbook](https://img.shields.io/badge/Ansible%20Playbook-grey?stype=flat&logo=ansible&logoColor=EE0000)](site.yml)
 ![GitHub last commit](https://img.shields.io/github/last-commit/lpwoodhouse/playbook_bitnami_renew_cert)
 ![GitHub repo file count](https://img.shields.io/github/directory-file-count/lpwoodhouse/playbook_bitnami_renew_cert)
 ![GitHub top language](https://img.shields.io/github/languages/top/lpwoodhouse/playbook_bitnami_renew_cert)
