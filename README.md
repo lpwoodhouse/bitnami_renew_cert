@@ -1,8 +1,9 @@
-# Ansible Playbook: bitnami_renew_cert
+# Renew SSL Cert on AWS Lightsail Bitnami Host
+[![playbook](https://img.shields.io/badge/Ansible-Playbook-blue)](site.yml)
 ![GitHub last commit](https://img.shields.io/github/last-commit/lpwoodhouse/playbook_bitnami_renew_cert)
 ![GitHub repo file count](https://img.shields.io/github/directory-file-count/lpwoodhouse/playbook_bitnami_renew_cert)
 ![GitHub top language](https://img.shields.io/github/languages/top/lpwoodhouse/playbook_bitnami_renew_cert)
-
+[![GitHub](https://img.shields.io/github/license/lpwoodhouse/playbook_bitnami_renew_cert)](LICENSE)
 ## Purpose
 
 This play is for renewing a Let's Encrypt certificate installed using the bncert-tool or Lego tool.<br>
@@ -41,10 +42,6 @@ None
         - check_cert
         - renew_cert
 ```
-
-## License
-
-[![GitHub](https://img.shields.io/github/license/lpwoodhouse/playbook_bitnami_renew_cert)](LICENSE)
 
 ## Author Information
 
